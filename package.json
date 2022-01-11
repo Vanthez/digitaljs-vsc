@@ -1,0 +1,138 @@
+{
+  "name": "digitaljs-vsc",
+  "displayName": "DigitalJS-VSC",
+  "version": "0.0.1",
+  "description": "Integration of digital logic simulator DigitalJS with Visual Studio Code.",
+  "main": "./src/extension.js",
+  "engines": {
+    "vscode": "^1.62.0"
+  },
+  "categories": [
+    "Visualization"
+  ],
+  "keywords": [
+    "DigitalJS",
+    "Yosys",
+    "Verilog",
+    "System Verilog",
+    "HDL"
+  ],
+  "extensionKind": [
+    "ui"
+  ],
+  "publisher": "michal-markiewicz",
+  "author": "Michał Markiewicz",
+  "activationEvents": [
+    "onCommand:digitaljs-vsc.simulate",
+    "onCommand:digitaljs-vsc.digitalize",
+    "onCommand:digitaljs-vsc.jsonize",
+    "onCommand:digitaljs-vsc.examples"
+  ],
+  "contributes": {
+    "configuration": {
+      "title": "DigitalJS-VSC",
+      "properties": {
+        "digitaljs-VSC.spawnInTheSameColumn": {
+          "type": "boolean",
+          "default": false,
+          "description": "Controls whether DigitalJS Panel will appear in the same column or one beside the one with source file."
+        },
+        "digitaljs-VSC.optimizeInYosys": {
+          "type": "boolean",
+          "default": false,
+          "description": "Controls Yosys optimization of the synthesized circuit ('opt -full'). This might make the circuit differ significantly from its HDL specification."
+        },
+        "digitaljs-VSC.simplifyDiagram": {
+          "type": "boolean",
+          "default": true,
+          "description": "Controls activation of post-processing of Yosys output to reduce the number of components and improve the readability."
+        },
+        "digitaljs-VSC.layoutEngine": {
+          "type": "string",
+          "default": "ElkJS",
+          "enum": [
+            "ElkJS",
+            "Dagre"
+          ],
+          "description": "Changes how the circuit elements are automatically positioned after synthesis. ElkJS is more readable, Dagre is legacy."
+        },
+        "digitaljs-VSC.simulationEngine": {
+          "type": "string",
+          "default": "Synchronous",
+          "enum": [
+            "WebWorker",
+            "Synchronous"
+          ],
+          "description": "Changes how the synthesized circuit is sumulated. WebWorker engine is currently unavailable and will not take an effect. The synchronous engine is well tested, but slower in comparison to WebWorker."
+        },
+        "digitaljs-VSC.experimentalFsmTransform": {
+          "type": "string",
+          "default": "Disabled",
+          "enum": [
+            "Disabled",
+            "Enabled",
+            "AsCircuitElement"
+          ],
+          "description": "Enables finite state machine processing in yosys. This corresponds to the 'fsm' and 'fsm -nomap' Yosys commands."
+        },
+        "digitaljs-VSC.mergeMoreLogicIntoFsm": {
+          "type": "boolean",
+          "default": false,
+          "description": "This corresponds to the '-expand' part of 'fsm' Yosys command. Works only if Fsm Transform option is not set to Disabled."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "digitaljs-vsc.simulate",
+        "title": "Simulate circuit from current .v/.sv file",
+        "category": "DigitalJS-VSC"
+      },
+      {
+        "command": "digitaljs-vsc.digitalize",
+        "title": "Simulate circuit from current .json file",
+        "category": "DigitalJS-VSC"
+      },
+      {
+        "command": "digitaljs-vsc.jsonize",
+        "title": "Generate DigitalJS compatible json from current .v/.sv file",
+        "category": "DigitalJS-VSC"
+      },
+      {
+        "command": "digitaljs-vsc.examples",
+        "title": "Open DigitalJS-VSC examples folder",
+        "category": "DigitalJS-VSC"
+      }
+    ]
+  },
+  "scripts": {
+    "postinstall": "patch-package",
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "node ./src/test/runTest.js"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.16.3",
+    "@types/glob": "^7.1.4",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "14.x",
+    "@types/vscode": "^1.62.0",
+    "@vscode/test-electron": "^1.6.2",
+    "eslint": "^8.1.0",
+    "glob": "^7.1.7",
+    "mocha": "^9.1.3",
+    "typescript": "^4.4.4"
+  },
+  "dependencies": {
+    "digitaljs": "^0.10.0",
+    "jquery": "^3.6.0",
+    "patch-package": "^6.4.7",
+    "sinon": "^12.0.1",
+    "yosys": "=0.10.5",
+    "yosys2digitaljs": "=0.5.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vanthez"
+  }
+}

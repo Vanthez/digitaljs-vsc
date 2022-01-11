@@ -1,0 +1,139 @@
+:root {
+	--border-radius: 6px;
+	--border-thickness: 1px;
+	--prm-size: 40px;
+	--snd-size: 36px;
+}
+
+body:not(#paper *) {
+	padding: 8px 18px;
+	color: var(--vscode-foreground);
+	font-size: var(--vscode-font-size) !important;
+	font-weight: var(--vscode-font-weight) !important;
+	font-family: var(--vscode-font-family) !important;
+	background-color: var(--vscode-editor-background);
+}
+
+body > * {
+	margin-block-end: 8px;
+}
+
+a {
+	vertical-align: top;
+}
+
+select:not(#paper *) {
+	background-color: var(--vscode-input-background) !important;
+	color: var(--vscode-input-foreground) !important;
+	font-family: var(--vscode-font-family) !important;
+	vertical-align: middle !important;
+	margin-right: 0px !important;
+}
+
+option:not(#paper *) {
+	background-color: var(--vscode-input-background) !important;
+	color: var(--vscode-input-foreground) !important;
+	font-family: var(--vscode-font-family) !important;
+}
+
+input:not(#paper *) {
+	border-width: var(--border-thickness);
+	border-color: var(--vscode-input-border);
+	font-family: var(--vscode-font-family) !important;
+	color: var(--vscode-input-foreground) !important;
+	background-color: var(--vscode-input-background) !important;
+	vertical-align: middle;
+}
+
+.clock {
+	border-radius: var(--border-radius) 0px 0px var(--border-radius);
+	text-align: center;
+	width: var(--prm-size) !important;
+	height: 38px !important;
+	padding: 0px 0px !important;
+	vertical-align: bottom;
+}
+
+.tickTimer {
+	font-size: 18px;
+	border-radius: 0px var(--border-radius) var(--border-radius) 0px;
+	border-left: none;
+	width: 140px !important;
+	height: 38px !important;
+	padding: 0px 8px !important;
+	vertical-align: bottom;
+}
+
+button {
+	border: none;
+	text-align: center;
+	color: var(--vscode-button-foreground);
+	background: var(--vscode-button-background);
+	vertical-align: bottom;
+}
+
+button:hover {
+	cursor: pointer;
+	background: var(--vscode-button-hoverBackground);
+}
+
+button:disabled {
+	cursor: default;
+	color: var(--vscode-button-secondaryForeground);
+	background: var(--vscode-button-secondaryBackground);
+}
+
+.prm {
+	width: var(--prm-size);
+	height: var(--prm-size);
+}
+
+.serialize {
+	width: 192px;
+	height: var(--snd-size);
+}
+
+.snd {
+	width: var(--snd-size);
+	height: var(--snd-size);
+}
+
+.indentleft {
+	margin-left: 6px;
+}
+
+.left {
+	border-radius: var(--border-radius) 0px 0px var(--border-radius);
+	border-right: solid var(--border-thickness) var(--vscode-editor-background);
+}
+
+.mid {
+	border-right: solid var(--border-thickness) var(--vscode-editor-background);
+}
+
+.right {
+	width: 39px;
+	border-radius: 0px var(--border-radius) var(--border-radius) 0px;
+	margin-right: 15px;
+}
+
+.rightsnd {
+	width: 35px !important;
+	border-radius: 0px var(--border-radius) var(--border-radius) 0px;
+	margin-right: 15px;
+}
+
+#mediabox {
+	font-size: 0px;
+	display: inline-block;
+}
+
+#paper, #monitor, #iopanel {
+	margin-block-end: 2px;
+	box-sizing: border-box;
+	overflow: auto;
+}
+
+#checkboxes {
+	margin-left: -4px;
+}
