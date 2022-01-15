@@ -105,6 +105,8 @@ async function tryYosysToDigitalJson(yosysJson) {
 			column,
 			getDigitaljsPanelOptions(extensionUri),
 		);
+		const iconUri = vscode.Uri.joinPath(extensionUri, 'media', 'img', 'logo', 'digitaljs_logo.png');
+		panel.iconPath = iconUri;
 		DigitaljsPanel.currentPanel = new DigitaljsPanel(panel, extensionUri, digitaljsInput, fileName);
 	}
 
@@ -123,6 +125,7 @@ async function tryYosysToDigitalJson(yosysJson) {
 		const digitaljsPath = vscode.Uri.joinPath(this._extensionUri, 'node_modules', 'digitaljs', 'dist', 'main.js');
 		const indexPath = vscode.Uri.joinPath(this._extensionUri, 'src', 'index.js');
 		const stylesPath = vscode.Uri.joinPath(this._extensionUri, 'media', 'webview.css');
+		const digitaljsLogoSrc = 'https://raw.githubusercontent.com/tilk/digitaljs_online/master/public/android-chrome-192x192.png';
 
 		const digitaljsUri = webview.asWebviewUri(digitaljsPath);
 		const indexUri = (indexPath).with( { 'scheme': 'vscode-resource' } );
@@ -132,7 +135,6 @@ async function tryYosysToDigitalJson(yosysJson) {
 		const layoutEngine = (config.get('layoutEngine') == 'ElkJS') ? 'elkjs' : 'dagre';
 		const simulationEngine = config.get('simulationEngine');
 		
-		const digitaljsLogoSrc = 'https://raw.githubusercontent.com/tilk/digitaljs_online/master/public/android-chrome-192x192.png';
 		const randomNonce = randomizeNonce();
 		const digitaljsInput = this._digitaljsInput;
 
@@ -198,7 +200,7 @@ function activate(context) {
 			const fileName = getCurrentFileName();
 			const fileNameArray = fileName.split('.');
 			const fileExtension = fileNameArray[fileNameArray.length - 1];
-			const fileNameWithoutExtension = fileName.replaceAll(' ', '_').replace('.' + fileExtension, '');
+			const fileNameWithoutExtension = fileName.replaceAll(' ', '_').replaceAll('.' + fileExtension, '');
 			if (fileExtension != 'sv' && fileExtension != 'v') {
 				vscode.window.showErrorMessage('Input file for "simulate" command needs to have ".sv" or ".v" extension.');
 				return;
@@ -236,7 +238,7 @@ function activate(context) {
 			const fileName = getCurrentFileName();
 			const fileNameArray = fileName.split('.');
 			const fileExtension = fileNameArray[fileNameArray.length - 1];
-			const fileNameWithoutExtension = fileName.replaceAll(' ', '_').replace('.' + fileExtension, '');
+			const fileNameWithoutExtension = fileName.replaceAll(' ', '_').replaceAll('.' + fileExtension, '');
 			if (fileExtension != 'sv' && fileExtension != 'v') {
 				vscode.window.showErrorMessage('Input file for "jsonize" command needs to have ".sv" or ".v" extension.');
 				return;

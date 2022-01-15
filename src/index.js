@@ -1,3 +1,5 @@
+// This file implementation was inspired by https://github.com/tilk/digitaljs/blob/master/examples/template.html
+// as it serves DigitalJS API which is subject to Copyright 2018 Marek Materzok under BSD 2-Clause
 /* eslint-env browser */
 /* eslint-env jquery */
 /* global digitaljs */
