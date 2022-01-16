@@ -5,7 +5,7 @@
 	--snd-size: 36px;
 }
 
-body:not(#paper *) {
+body:not(#paper *):not(div.ui-dialog *) {
 	padding: 8px 18px;
 	color: var(--vscode-foreground);
 	font-size: var(--vscode-font-size) !important;
@@ -22,7 +22,7 @@ a {
 	vertical-align: top;
 }
 
-select:not(#paper *) {
+select:not(#paper *):not(div.ui-dialog *) {
 	background-color: var(--vscode-input-background) !important;
 	color: var(--vscode-input-foreground) !important;
 	font-family: var(--vscode-font-family) !important;
@@ -30,13 +30,13 @@ select:not(#paper *) {
 	margin-right: 0px !important;
 }
 
-option:not(#paper *) {
+option:not(#paper *):not(div.ui-dialog *) {
 	background-color: var(--vscode-input-background) !important;
 	color: var(--vscode-input-foreground) !important;
 	font-family: var(--vscode-font-family) !important;
 }
 
-input:not(#paper *) {
+input:not(#paper *):not(div.ui-dialog *) {
 	border-width: var(--border-thickness);
 	border-color: var(--vscode-input-border);
 	font-family: var(--vscode-font-family) !important;
@@ -64,7 +64,7 @@ input:not(#paper *) {
 	vertical-align: bottom;
 }
 
-button {
+button:not(div.ui-dialog *) {
 	border: none;
 	text-align: center;
 	color: var(--vscode-button-foreground);
@@ -72,12 +72,12 @@ button {
 	vertical-align: bottom;
 }
 
-button:hover {
+button:hover:not(div.ui-dialog *) {
 	cursor: pointer;
 	background: var(--vscode-button-hoverBackground);
 }
 
-button:disabled {
+button:disabled:not(div.ui-dialog *) {
 	cursor: default;
 	color: var(--vscode-button-secondaryForeground);
 	background: var(--vscode-button-secondaryBackground);
@@ -103,24 +103,24 @@ button:disabled {
 }
 
 .left {
-	border-radius: var(--border-radius) 0px 0px var(--border-radius);
-	border-right: solid var(--border-thickness) var(--vscode-editor-background);
+	border-radius: var(--border-radius) 0px 0px var(--border-radius) !important;
+	border-right: solid var(--border-thickness) var(--vscode-editor-background) !important;
 }
 
 .mid {
-	border-right: solid var(--border-thickness) var(--vscode-editor-background);
+	border-right: solid var(--border-thickness) var(--vscode-editor-background) !important;
 }
 
 .right {
 	width: 39px;
-	border-radius: 0px var(--border-radius) var(--border-radius) 0px;
-	margin-right: 15px;
+	border-radius: 0px var(--border-radius) var(--border-radius) 0px !important;
+	margin-right: 15px !important;
 }
 
 .rightsnd {
 	width: 35px !important;
-	border-radius: 0px var(--border-radius) var(--border-radius) 0px;
-	margin-right: 15px;
+	border-radius: 0px var(--border-radius) var(--border-radius) 0px !important;
+	margin-right: 15px !important;
 }
 
 #mediabox {
@@ -136,4 +136,12 @@ button:disabled {
 
 #checkboxes {
 	margin-left: -4px;
+}
+
+#paper body {
+	padding: 0px;
+}
+
+#iopanel input[type="checkbox"] {
+	margin-left: 0px;
 }
