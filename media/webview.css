@@ -138,7 +138,7 @@ button:disabled:not(div.ui-dialog *) {
 	margin-left: -4px;
 }
 
-#paper body {
+#paper .valinput body {
 	padding: 0px;
 }
 
