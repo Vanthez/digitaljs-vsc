@@ -11,18 +11,18 @@ DigitalJS-VSC attempts to mirror feature set of web application [digitaljs_onlin
 ![Features](./media/img/commands.png)
 
 * `digitaljs-vsc.simulate` – opens/updates a webview panel with circuit simulation from Verilog, System Verilog or DigitalJS compatible json file that is currently active.
-* `digitaljs-vsc.jsonize` – opens new a tab with DigitalJS compatible json generated from Verilog or System Verilog file that is currently active. File is opened and is not automatically saved on the user's disk. If you wish to preserve generated json or run command `digitaljs-vsc.digitalize` on it, please save generated json file manually.
+* `digitaljs-vsc.jsonize` – opens new a tab with DigitalJS compatible json generated from Verilog or System Verilog file that is currently active. File is opened and is not automatically saved on the user's disk. If you wish to preserve generated json or run command `digitaljs-vsc.simulate` on it, please save generated json file manually.
 * `digitaljs-vsc.examples` – opens a folder with predefined .sv and DigitalJS compatible .json examples ready to interact with DigitalJS-VSC functionalities. Warning: executing this command will replace currently opened workspace. Examples will not restore themselves to the original form if overridden.
 
 Commands can be run via `Shift+Ctrl+P` (Windows, Linux) or `Shift+CMD+P` (macOS) and are labeled as `DigitalJS-VSC`.
 
 ## Notes regarding the panel
 
-* Only one circuit will be simulated at any given moment. Running `digitaljs-vsc.simulate` or `digitaljs-vsc.digitalize` on a different file than the one currently being simulated will replace the current panel and refresh the webview with new input in a position relative to the column of the new source file.
+* Only one circuit will be simulated at any given moment. Running `digitaljs-vsc.simulate` on a different file than the one currently being simulated will replace the current panel and refresh the webview with new input in a position relative to the column of the new source file.
 * The panel with circuit simulation will run in the background even when not active or visible to allow switching between the files, e.g. with the source code.
 It is recommended to manually close the panel when the simulation is no longer needed.
 * Exiting Visual Studio Code with opened panel will automatically close it and the panel will not be restored after opening the editor again.
-* Webview with the simulation by default will appear in the column beside the source file to allow interaction while still seeing the source code. It can be changed to be spawned within the same column, e.g. for fullscreen usage via settings. Once running, the webview can be moved freely between the columns and will automatically swap columns only after running `digitaljs-vsc.simulate` or `digitaljs-vsc.digitalize` again.
+* Webview with the simulation by default will appear in the column beside the source file to allow interaction while still seeing the source code. It can be changed to be spawned within the same column, e.g. for fullscreen usage via settings. Once running, the webview can be moved freely between the columns and will automatically swap columns only after running `digitaljs-vsc.simulate` again.
 
 ## Extension Settings
 

@@ -34,7 +34,6 @@
   ],
   "activationEvents": [
     "onCommand:digitaljs-vsc.simulate",
-    "onCommand:digitaljs-vsc.digitalize",
     "onCommand:digitaljs-vsc.jsonize",
     "onCommand:digitaljs-vsc.examples"
   ],
@@ -95,7 +94,7 @@
     "commands": [
       {
         "command": "digitaljs-vsc.simulate",
-        "title": "Simulate circuit from current .v, .sv or DigitalJS compatible .json file",
+        "title": "Simulate circuit from current .v/.sv/.json file",
         "category": "DigitalJS-VSC"
       },
       {
