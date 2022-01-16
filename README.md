@@ -10,9 +10,8 @@ DigitalJS-VSC attempts to mirror feature set of web application [digitaljs_onlin
 
 ![Features](./media/img/commands.png)
 
-* `digitaljs-vsc.simulate` – opens/updates a webview panel with circuit simulation from Verilog or System Verilog file that is currently active.
+* `digitaljs-vsc.simulate` – opens/updates a webview panel with circuit simulation from Verilog, System Verilog or DigitalJS compatible json file that is currently active.
 * `digitaljs-vsc.jsonize` – opens new a tab with DigitalJS compatible json generated from Verilog or System Verilog file that is currently active. File is opened and is not automatically saved on the user's disk. If you wish to preserve generated json or run command `digitaljs-vsc.digitalize` on it, please save generated json file manually.
-* `digitaljs-vsc.digitalize` – opens/updates a webview panel with circuit simulation from DigitalJS compatible json file that is currently active.
 * `digitaljs-vsc.examples` – opens a folder with predefined .sv and DigitalJS compatible .json examples ready to interact with DigitalJS-VSC functionalities. Warning: executing this command will replace currently opened workspace. Examples will not restore themselves to the original form if overridden.
 
 Commands can be run via `Shift+Ctrl+P` (Windows, Linux) or `Shift+CMD+P` (macOS) and are labeled as `DigitalJS-VSC`.

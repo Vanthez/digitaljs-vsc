@@ -95,12 +95,7 @@
     "commands": [
       {
         "command": "digitaljs-vsc.simulate",
-        "title": "Simulate circuit from current .v/.sv file",
-        "category": "DigitalJS-VSC"
-      },
-      {
-        "command": "digitaljs-vsc.digitalize",
-        "title": "Simulate circuit from current .json file",
+        "title": "Simulate circuit from current .v, .sv or DigitalJS compatible .json file",
         "category": "DigitalJS-VSC"
       },
       {

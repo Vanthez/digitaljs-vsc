@@ -7,21 +7,21 @@ async function verilogToYosys(verilogContent, fileName, fileExtension, optimize,
         printErr: (text) => console.error(text),
     });
 
-    const namesv = fileName + fileExtension;
+    const name = fileName + fileExtension;
     const nameys = fileName + '.ys';
     const namejson = fileName + '.json';
-    const sv = (fileExtension == "sv") ? "-sv " : "";
+    const extension = (fileExtension == "sv") ? "-sv " : "";
 
     const optSimp = optimize ? "opt" : "opt_clean";
     const opt = optimize ? "opt -full" : "opt_clean";
 
     // @ts-ignore
     const FS = yosys.getModule().FS;
-    FS.writeFile(namesv, verilogContent, { encoding: 'utf-8' });
+    FS.writeFile(name, verilogContent, { encoding: 'utf-8' });
 
     FS.writeFile(nameys, `
         design -reset;
-        read_verilog ${sv}${namesv};
+        read_verilog ${extension}${name};
         hierarchy -auto-top;
         proc;
         ${optSimp};

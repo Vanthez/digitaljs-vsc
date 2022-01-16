@@ -149,7 +149,7 @@ async function tryYosysToDigitalJson(yosysJson) {
 			<body>
 				<div id="mediabox">
 					<a href="https://digitaljs.tilk.eu/">
-						<img src="${digitaljsLogoSrc}" width="40" height="40"/>
+						<img src="${digitaljsLogoSrc}" alt="" width="40" height="40"/>
 					</a>
 
 					<button name="pause" class="prm left indentleft" type="button" title="Pause" disabled="true">⏸</button>
@@ -195,39 +195,27 @@ async function tryYosysToDigitalJson(yosysJson) {
 function activate(context) {
 	context.subscriptions.push(
 		vscode.commands.registerCommand('digitaljs-vsc.simulate', async () => {
-			const verilogInput = readCurrentFile();
-			if (!verilogInput) { return; }
+			let digitaljsInput = readCurrentFile();
+			if (!digitaljsInput) { return; }
 			const fileName = getCurrentFileName();
 			const fileNameArray = fileName.split('.');
 			const fileExtension = fileNameArray[fileNameArray.length - 1];
-			const fileNameWithoutExtension = fileName.replaceAll(' ', '_').replaceAll('.' + fileExtension, '');
-			if (fileExtension != 'sv' && fileExtension != 'v') {
-				vscode.window.showErrorMessage('Input file for "simulate" command needs to have ".sv" or ".v" extension.');
+			if (fileExtension != 'sv' && fileExtension != 'v' && fileExtension != 'json') {
+				vscode.window.showErrorMessage('Input file for "simulate" command needs to have ".sv", ".v" or ".json" extension.');
 				return;
 			}
-			const config = vscode.workspace.getConfiguration('digitaljs-VSC');
-			const optimizeInYosys = config.get('optimizeInYosys');
-			const fsmOpt = getFsmOptions(config);
-			const yosysJson = await tryVerilogToYosys(verilogInput, fileNameWithoutExtension, fileExtension, optimizeInYosys, fsmOpt);
-			if (!yosysJson) { return; }
-			const digitalJson = await tryYosysToDigitalJson(yosysJson);
-			if (!digitalJson) { return; }
-			DigitaljsPanel.spawnPanel(context.extensionUri, JSON.stringify(digitalJson), fileName);
-		})
-	);
-
-	context.subscriptions.push(
-		vscode.commands.registerCommand('digitaljs-vsc.digitalize', async () => {
-			const digitalJson = readCurrentFile();
-			if (!digitalJson) { return; }
-			const fileName = getCurrentFileName();
-			const fileNameArray = fileName.split('.');
-			const fileExtension = fileNameArray[fileNameArray.length - 1];
-			if (fileExtension != 'json') { 
-				vscode.window.showErrorMessage('Input file for "digitalize" command needs to be of ".json" extension.');
-				return;
+			if (fileExtension != 'json') {
+				const fileNameWithoutExtension = fileName.replaceAll(' ', '_').replaceAll('.' + fileExtension, '');
+				const config = vscode.workspace.getConfiguration('digitaljs-VSC');
+				const optimizeInYosys = config.get('optimizeInYosys');
+				const fsmOpt = getFsmOptions(config);
+				const yosysJson = await tryVerilogToYosys(digitaljsInput, fileNameWithoutExtension, fileExtension, optimizeInYosys, fsmOpt);
+				if (!yosysJson) { return; }
+				const digitalJson = await tryYosysToDigitalJson(yosysJson);
+				if (!digitalJson) { return; }
+				digitaljsInput = JSON.stringify(digitalJson);
 			}
-			DigitaljsPanel.spawnPanel(context.extensionUri, digitalJson, fileName);
+			DigitaljsPanel.spawnPanel(context.extensionUri, digitaljsInput, fileName);
 		})
 	);
 
