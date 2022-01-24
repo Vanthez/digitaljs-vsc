@@ -14,4 +14,5 @@ interface Document {
   simplifyDiagram: boolean;
   layoutEngine: string;
   simulationEngine: string;
+  workerURL: any;
 }

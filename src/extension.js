@@ -1,6 +1,6 @@
 const vscode = require('vscode');
 const {readFileSync} = require('fs');
-const {basename} = require('path');
+const {join, basename} = require('path');
 const {verilogToYosys, yosysToDigitalJson} = require('./converter');
 
 function getDigitaljsPanelOptions(extensionUri) {
@@ -69,7 +69,7 @@ async function tryYosysToDigitalJson(yosysJson) {
 	}
 }
 
- class DigitaljsPanel {
+class DigitaljsPanel {
 	static currentPanel = null;
 	static viewType = 'DigitalJS-VSC';
 
@@ -77,15 +77,16 @@ async function tryYosysToDigitalJson(yosysJson) {
 	_extensionUri;
 	_digitaljsInput = '';
 
-	constructor(panel, extensionUri, digitaljsInput, fileName) {
+	constructor(panel, extensionUri, digitaljsInput, fileName, workerScript) {
 		this._panel = panel;
 		this._extensionUri = extensionUri;
 		this._digitaljsInput = digitaljsInput || '';
+		this._workerScript = workerScript;
 		this._updatePanel(fileName);
 		this._panel.onDidDispose(() => this.dispose(), null);
 	}
 
-	static spawnPanel(extensionUri, digitaljsInput, fileName) {
+	static spawnPanel(extensionUri, digitaljsInput, fileName, workerScript) {
 		const config = vscode.workspace.getConfiguration('digitaljs-VSC');
 		const spawnInTheSameColumn = config.get('spawnInTheSameColumn');
 		const column = vscode.window.activeTextEditor
@@ -107,7 +108,7 @@ async function tryYosysToDigitalJson(yosysJson) {
 		);
 		const iconUri = vscode.Uri.joinPath(extensionUri, 'media', 'img', 'logo', 'digitaljs_logo.png');
 		panel.iconPath = iconUri;
-		DigitaljsPanel.currentPanel = new DigitaljsPanel(panel, extensionUri, digitaljsInput, fileName);
+		DigitaljsPanel.currentPanel = new DigitaljsPanel(panel, extensionUri, digitaljsInput, fileName, workerScript);
 	}
 
 	dispose() {
@@ -137,12 +138,13 @@ async function tryYosysToDigitalJson(yosysJson) {
 		
 		const randomNonce = randomizeNonce();
 		const digitaljsInput = this._digitaljsInput;
+		const workerScript = this._workerScript;
 
 		return `<!DOCTYPE html>
 			<html lang="en">
 			<head>
 				<meta charset="utf-8">
-				<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src ${digitaljsLogoSrc} data:; script-src 'nonce-${randomNonce}'; style-src ${webview.cspSource} 'unsafe-inline';">
+				<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src ${digitaljsLogoSrc} data:; script-src 'nonce-${randomNonce}'; worker-src blob:; style-src ${webview.cspSource} 'unsafe-inline';">
 				<link href="${stylesUri}" rel="stylesheet">
 				<title>DigitalJS-VSC</title>
 			</head>
@@ -183,7 +185,10 @@ async function tryYosysToDigitalJson(yosysJson) {
 				<div id="iopanel">
 				</div>
 				<script nonce="${randomNonce}">
-					Object.assign(document, { digitaljsInput: ${digitaljsInput} }, ${JSON.stringify({simplifyDiagram, layoutEngine, simulationEngine})});
+					Object.assign(document, {
+						digitaljsInput: ${digitaljsInput},
+						workerURL: URL.createObjectURL(new Blob([${JSON.stringify(workerScript)}], {type: 'text/javascript'})),
+					}, ${JSON.stringify({simplifyDiagram, layoutEngine, simulationEngine})});
 				</script>
 				<script nonce="${randomNonce}" src="${digitaljsUri}"></script>
 				<script nonce="${randomNonce}" src="${indexUri}"></script>
@@ -193,6 +198,8 @@ async function tryYosysToDigitalJson(yosysJson) {
 }
 
 function activate(context) {
+	const workerScript = readFileSync(join(__dirname , '../dist/digitaljs-webworker.js'), 'utf-8');
+
 	context.subscriptions.push(
 		vscode.commands.registerCommand('digitaljs-vsc.simulate', async () => {
 			let digitaljsInput = readCurrentFile();
@@ -215,7 +222,7 @@ function activate(context) {
 				if (!digitalJson) { return; }
 				digitaljsInput = JSON.stringify(digitalJson);
 			}
-			DigitaljsPanel.spawnPanel(context.extensionUri, digitaljsInput, fileName);
+			DigitaljsPanel.spawnPanel(context.extensionUri, digitaljsInput, fileName, workerScript);
 		})
 	);
 

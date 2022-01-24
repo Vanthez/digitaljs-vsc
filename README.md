@@ -32,7 +32,7 @@ DigitalJS-VSC contributes the following settings:
 * `digitaljs-VSC.optimizeInYosys` – enables Yosys optimization of the synthesized circuit ('opt -full'). This might make the circuit differ significantly from its HDL specification. It is disabled by default.
 * `digitaljs-VSC.simplifyDiagram` – controls activation of post-processing of Yosys output to reduce the number of components and improve the readability. It is enabled by default.
 * `digitaljs-VSC.layoutEngine` – changes how the circuit elements are automatically positioned after synthesis. Options: `"ElkJS"` (more readable, default), `"Dagre"` (legacy).
-* `digitaljs-VSC.simulationEngine` – changes how the synthesized circuit is simulated. Options: `"WebWorker"` (currently disabled and will not take an effect), `"Synchronous"` (default). The synchronous engine is well tested, but slower in comparison to WebWorker.
+* `digitaljs-VSC.simulationEngine` – changes how the synthesized circuit is simulated. Options: `"WebWorker"` (default), `"Synchronous"`. The synchronous engine is well tested, but slower in comparison to WebWorker.
 * `digitaljs-VSC.experimentalFsmTransform` – controls finite state machine processing in Yosys. This corresponds to the `'fsm'` and `'fsm -nomap'` Yosys commands. Options: `"Disabled"` (default), `"Enabled"`, `"AsCircuitElement"`.
 * `digitaljs-VSC.mergeMoreLogicIntoFsm` – enables usage of `'-expand'` for `fsm` within Yosys. Disabled by default. Works only if Fsm Transform option is not set to `Disabled`.
 
@@ -56,11 +56,9 @@ DigitalJS-VSC is designed not to require any setting up before the use.
 
 ## Known Issues
 
-* "WebWorker" engine is currently unavailable and DigitalJS will always run on Synchronous engine, regardless of current settings.
-
 ## Release Notes
 
-### 0.0.1
+### 0.0.3
 
 Initial release of DigitalJS-VSC
 

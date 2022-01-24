@@ -8,8 +8,8 @@
     const digitaljsInput = document.digitaljsInput;
     const simplifyDiagram = document.simplifyDiagram;
     const layoutEngine = document.layoutEngine;
-    // TODO: restore below line after introducing WorkerEngine
-    // const simulationEngine = document.simulationEngine;
+    const workerURL = document.workerURL;
+    const simulationEngine = document.simulationEngine;
     let circuit, monitor, monitorview, iopanel;
     document.addEventListener('DOMContentLoaded', () => {
       let pause = $('button[name=pause]');
@@ -23,10 +23,16 @@
       }
       const loadCircuit = function (json) {
         if (simplifyDiagram) { json = digitaljs.transform.transformCircuit(json) };
-        const engines = { Synchronous: digitaljs.engines.BrowserSynchEngine, WebWorker: digitaljs.engines.WorkerEngine };
-        // TODO: restore below line after introducing WorkerEngine
-        // circuit = new digitaljs.Circuit(json, { layoutEngine: layoutEngine, engine: engines[simulationEngine] });
-        circuit = new digitaljs.Circuit(json, { layoutEngine: layoutEngine, engine: engines['Synchronous'] });
+        const engines = {
+          Synchronous: {
+            engine: digitaljs.engines.BrowserSynchEngine,
+          },
+          WebWorker: {
+            engine: digitaljs.engines.WorkerEngine,
+            engineOptions: {workerURL},
+          },
+        };
+        circuit = new digitaljs.Circuit(json, { layoutEngine, ...engines[simulationEngine] });
         monitor = new digitaljs.Monitor(circuit);
         monitorview = new digitaljs.MonitorView({ model: monitor, el: $('#monitor') });
         iopanel = new digitaljs.IOPanelView({model: circuit, el: $('#iopanel') });

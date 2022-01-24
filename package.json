@@ -1,7 +1,7 @@
 {
   "name": "digitaljs-vsc",
   "displayName": "DigitalJS-VSC",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Integration of digital logic simulator DigitalJS with Visual Studio Code.",
   "main": "./src/extension.js",
   "publisher": "michal-markiewicz",
@@ -10,7 +10,7 @@
   "icon": "media/img/logo/digitaljs_logo.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/vanthez/digitaljs-vsc"
+    "url": "https://github.com/vanthez/digitaljs-vsc.git"
   },
   "engines": {
     "vscode": "^1.62.0"
@@ -67,12 +67,12 @@
         },
         "digitaljs-VSC.simulationEngine": {
           "type": "string",
-          "default": "Synchronous",
+          "default": "WebWorker",
           "enum": [
             "WebWorker",
             "Synchronous"
           ],
-          "description": "Changes how the synthesized circuit is sumulated. WebWorker engine is currently unavailable and will not take an effect. The synchronous engine is well tested, but slower in comparison to WebWorker."
+          "description": "Changes how the synthesized circuit is simulated. The synchronous engine is well tested, but slower in comparison to WebWorker."
         },
         "digitaljs-VSC.experimentalFsmTransform": {
           "type": "string",
@@ -111,6 +111,7 @@
   },
   "scripts": {
     "postinstall": "patch-package",
+    "build": "webpack",
     "lint": "eslint .",
     "pretest": "npm run lint",
     "test": "node ./src/test/runTest.js"
@@ -125,7 +126,9 @@
     "eslint": "^8.1.0",
     "glob": "^7.1.7",
     "mocha": "^9.1.3",
-    "typescript": "^4.4.4"
+    "typescript": "^4.4.4",
+    "webpack": "^5.67.0",
+    "webpack-cli": "^4.9.2"
   },
   "dependencies": {
     "digitaljs": "^0.10.0",
