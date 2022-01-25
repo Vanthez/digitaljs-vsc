@@ -21,7 +21,7 @@ function readCurrentFile() {
 		const currentWindowPath = vscode.window.activeTextEditor.document.uri.fsPath;
 		return readFileSync(currentWindowPath, 'utf-8');
 	} catch (err) {
-		vscode.window.showErrorMessage('Currently active input file provided is not saved on the disk or could not be read. ' + err.message);
+		vscode.window.showErrorMessage('Currently provided input file is not saved on the disk or could not be read. ' + err.message);
 	}
 }
 
@@ -54,7 +54,7 @@ async function tryVerilogToYosys(verilogInput, fileNameWithoutExtension, fileExt
 		const yosysJson = await verilogToYosys(verilogInput, fileNameWithoutExtension, fileExtension, optimizeInYosys, fsmOpt);
 		return yosysJson;
 	} catch {
-		vscode.window.showErrorMessage('yosys.js experienced a problem. Please check whether provided input file is valid System Verilog/Verilog program. You can check debug console to review Yosys error logs.');
+		vscode.window.showErrorMessage('yosys.js experienced a problem. Please check whether provided input file is valid Verilog/SystemVerilog program. You can check debug console to review Yosys error logs.');
 		return;
 	}
 }
@@ -208,7 +208,7 @@ function activate(context) {
 			const fileNameArray = fileName.split('.');
 			const fileExtension = fileNameArray[fileNameArray.length - 1];
 			if (fileExtension != 'sv' && fileExtension != 'v' && fileExtension != 'json') {
-				vscode.window.showErrorMessage('Input file for "simulate" command needs to have ".sv", ".v" or ".json" extension.');
+				vscode.window.showErrorMessage('Extension of the input file for "simulate" command needs to be ".sv", ".v" or ".json".');
 				return;
 			}
 			if (fileExtension != 'json') {
@@ -235,7 +235,7 @@ function activate(context) {
 			const fileExtension = fileNameArray[fileNameArray.length - 1];
 			const fileNameWithoutExtension = fileName.replaceAll(' ', '_').replaceAll('.' + fileExtension, '');
 			if (fileExtension != 'sv' && fileExtension != 'v') {
-				vscode.window.showErrorMessage('Input file for "jsonize" command needs to have ".sv" or ".v" extension.');
+				vscode.window.showErrorMessage('Extension of the input file for "simulate" command needs to be ".sv", ".v".');
 				return;
 			}
 			const config = vscode.workspace.getConfiguration('digitaljs-VSC');
