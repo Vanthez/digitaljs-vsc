@@ -123,6 +123,10 @@ class DigitaljsPanel {
 	}
 
 	_getHtml(webview) {
+		const randomNonce = randomizeNonce();
+		const digitaljsInput = this._digitaljsInput;
+		const workerScript = this._workerScript;
+
 		const digitaljsPath = vscode.Uri.joinPath(this._extensionUri, 'node_modules', 'digitaljs', 'dist', 'main.js');
 		const indexPath = vscode.Uri.joinPath(this._extensionUri, 'src', 'index.js');
 		const stylesPath = vscode.Uri.joinPath(this._extensionUri, 'media', 'webview.css');
@@ -134,11 +138,7 @@ class DigitaljsPanel {
 		const config = vscode.workspace.getConfiguration('digitaljs-VSC');
 		const simplifyDiagram = config.get('simplifyDiagram');
 		const layoutEngine = (config.get('layoutEngine') == 'ElkJS') ? 'elkjs' : 'dagre';
-		const simulationEngine = config.get('simulationEngine');
-		
-		const randomNonce = randomizeNonce();
-		const digitaljsInput = this._digitaljsInput;
-		const workerScript = this._workerScript;
+		const simulationEngine = (workerScript == '') ? 'Synchronous' : config.get('simulationEngine');
 
 		return `<!DOCTYPE html>
 			<html lang="en">
@@ -198,7 +198,13 @@ class DigitaljsPanel {
 }
 
 function activate(context) {
-	const workerScript = readFileSync(join(__dirname , '../dist/digitaljs-webworker.js'), 'utf-8');
+	let workerScript = '';
+	try {
+		workerScript = readFileSync(join(__dirname , '../dist/digitaljs-webworker.js'), 'utf-8');
+	}
+	catch {
+		vscode.window.showErrorMessage('WebWorker could not be loaded. Any simulation will run via "Synchronous" simulation engine, regardless of the extension settings.');
+	}
 
 	context.subscriptions.push(
 		vscode.commands.registerCommand('digitaljs-vsc.simulate', async () => {

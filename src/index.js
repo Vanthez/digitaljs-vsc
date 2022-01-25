@@ -29,7 +29,7 @@
           },
           WebWorker: {
             engine: digitaljs.engines.WorkerEngine,
-            engineOptions: {workerURL},
+            engineOptions: { workerURL },
           },
         };
         circuit = new digitaljs.Circuit(json, { layoutEngine, ...engines[simulationEngine] });
