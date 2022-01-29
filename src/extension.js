@@ -241,7 +241,7 @@ function activate(context) {
 			const fileExtension = fileNameArray[fileNameArray.length - 1];
 			const fileNameWithoutExtension = fileName.replaceAll(' ', '_').replaceAll('.' + fileExtension, '');
 			if (fileExtension != 'sv' && fileExtension != 'v') {
-				vscode.window.showErrorMessage('Extension of the input file for "simulate" command needs to be ".sv", ".v".');
+				vscode.window.showErrorMessage('Extension of the input file for "jsonize" command needs to be ".sv" or ".v".');
 				return;
 			}
 			const config = vscode.workspace.getConfiguration('digitaljs-VSC');

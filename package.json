@@ -1,13 +1,14 @@
 {
   "name": "digitaljs-vsc",
   "displayName": "DigitalJS-VSC",
-  "version": "0.0.3",
-  "description": "Integration of digital logic simulator DigitalJS with Visual Studio Code.",
+  "version": "0.1.0",
+  "description": "Integration of digital logic simulator DigitalJS with VS Code.",
   "main": "./src/extension.js",
   "publisher": "michal-markiewicz",
   "author": "Michał Markiewicz",
   "license": "BSD-2-Clause",
   "icon": "media/img/logo/digitaljs_logo.png",
+  "homepage": "https://github.com/vanthez/digitaljs-vsc",
   "repository": {
     "type": "git",
     "url": "https://github.com/vanthez/digitaljs-vsc.git"
@@ -110,7 +111,7 @@
     ]
   },
   "scripts": {
-    "postinstall": "patch-package",
+    "postinstall": "patch-package && npm run build",
     "build": "webpack",
     "lint": "eslint .",
     "pretest": "npm run lint",

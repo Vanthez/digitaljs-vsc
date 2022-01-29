@@ -1,5 +1,5 @@
 // This file implementation was inspired by https://github.com/tilk/digitaljs/blob/master/examples/template.html
-// as it serves DigitalJS API which is subject to Copyright 2018 Marek Materzok under BSD 2-Clause
+// as it serves DigitalJS API and is subject to Copyright 2018 Marek Materzok under BSD 2-Clause
 /* eslint-env browser */
 /* eslint-env jquery */
 /* global digitaljs */
@@ -78,9 +78,13 @@
       next.on('click', () => { circuit.updateGatesNext(); next.prop('disabled', circuit.running || !circuit.hasPendingEvents); });
       $('button[name=serialize]').on('click', () => {
         monitorview.shutdown();
+        monitorview = undefined;
         iopanel.shutdown();
+        iopanel = undefined;
         circuit.stop();
         const json = circuit.toJSON($('input[name=layout]').prop('checked'));
+        circuit.shutdown();
+        circuit = undefined;
         loadCircuit(json);
       });
       $('input[name=fixed]').change(function () {
@@ -93,7 +97,7 @@
       $('button[name=live]').on('click', () => { monitorview.live = true; });
       $(document).ready(function () { 
         try { 
-          loadCircuit(digitaljsInput) 
+          loadCircuit(digitaljsInput)
         } catch (err) {
           $('#paper').html('<br><br>Circuit could not be loaded properly via DigitalJS:<br>' + err.message + '<br><br>');
         }

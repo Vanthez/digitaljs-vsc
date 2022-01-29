@@ -10,10 +10,10 @@ async function verilogToYosys(verilogContent, fileName, fileExtension, optimize,
     const name = fileName + fileExtension;
     const nameys = fileName + '.ys';
     const namejson = fileName + '.json';
-    const extension = (fileExtension == "sv") ? "-sv " : "";
+    const extension = (fileExtension == 'sv') ? '-sv ' : '';
 
-    const optSimp = optimize ? "opt" : "opt_clean";
-    const opt = optimize ? "opt -full" : "opt_clean";
+    const optSimp = optimize ? 'opt' : 'opt_clean';
+    const opt = optimize ? 'opt -full' : 'opt_clean';
 
     // @ts-ignore
     const FS = yosys.getModule().FS;
