@@ -16,7 +16,7 @@ Commands can be run via `Shift+Ctrl+P` (Windows, Linux) or `Shift+CMD+P` (macOS)
 
 ## Extension workflow
 
-![Features](./media/img/workflow.png)
+![Features](https://raw.githubusercontent.com/Vanthez/digitaljs-vsc/main/media/img/workflow.png)
 ## Notes regarding the panel
 
 * Only one circuit will be simulated at any given moment. Running `digitaljs-vsc.simulate` on a different file than the one currently being simulated will replace the current panel and refresh the webview with new input in a position relative to the column of the new source file.
