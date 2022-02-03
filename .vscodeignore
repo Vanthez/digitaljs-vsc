@@ -1,8 +1,13 @@
 .vscode/**
 .vscode-test/**
-test/**
+**/test/
 .gitignore
 .yarnrc
 **/jsconfig.json
 **/*.map
 **/.eslintrc.json
+media/img/workflow.png
+media/img/demo.png
+patches/
+src/types.d.ts
+webpack.config.js

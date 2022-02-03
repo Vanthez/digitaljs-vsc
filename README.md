@@ -1,15 +1,15 @@
 # DigitalJS-VSC
 
-This extension integrates digital logic simulator [DigitalJS](https://github.com/tilk/digitaljs), [yosys2digitaljs](https://github.com/tilk/yosys2digitaljs) converter and [yosys.js](https://github.com/EDAcation/yosys.js) (WebAssembly version of [Yosys](https://github.com/YosysHQ/yosys)) with Visual Studio Code.
-
-It is designed to simulate circuits written in Verilog, SystemVerilog and DigitalJS compatible json and let users interact with them within a Webview.
+This extension integrates digital logic simulator [DigitalJS](https://github.com/tilk/digitaljs), [yosys2digitaljs](https://github.com/tilk/yosys2digitaljs) converter and [yosys.js](https://github.com/EDAcation/yosys.js) (WebAssembly version of [Yosys](https://github.com/YosysHQ/yosys)) with Visual Studio Code. It is designed to simulate circuits written in Verilog, SystemVerilog and DigitalJS compatible JSON and let users interact with them within a Webview.
 
 DigitalJS-VSC attempts to mirror feature set of web application [digitaljs_online](https://github.com/tilk/digitaljs_online) within Visual Studio Code. You can try out the original web application [here](https://digitaljs.tilk.eu/).
 
+Special credit to the author of the original DigitalJS toolset [Marek Materzok, PhD](https://www.tilk.eu/), [Institute of Computer Science (University of Wrocław)](https://ii.uni.wroc.pl/).
+
 ## Available commands
 DigitalJS-VSC contributes following commands:
-* `digitaljs-vsc.simulate` – opens/updates a webview panel with circuit simulation from Verilog, SystemVerilog or DigitalJS compatible json file that is currently active.
-* `digitaljs-vsc.jsonize` – opens a new tab with DigitalJS compatible json generated from Verilog or SystemVerilog file that is currently active. File is opened and is not automatically saved on the user's disk. If you wish to preserve generated json or run command `digitaljs-vsc.simulate` on it, please save the generated json file manually.
+* `digitaljs-vsc.simulate` – opens/updates a webview panel with circuit simulation from Verilog, SystemVerilog or DigitalJS compatible JSON file that is currently active.
+* `digitaljs-vsc.jsonize` – opens a new tab with DigitalJS compatible JSON generated from Verilog or SystemVerilog file that is currently active. File is opened and is not automatically saved on the user's disk. If you wish to preserve generated JSON or run command `digitaljs-vsc.simulate` on it, please save the generated JSON file manually.
 * `digitaljs-vsc.examples` – opens a folder (workspace) with predefined .sv and DigitalJS compatible .json examples ready to interact with DigitalJS-VSC functionalities. Warning: executing this command will replace currently opened workspace. Examples will not restore themselves to the original form if overridden.
 
 Commands can be run via `Shift+Ctrl+P` (Windows, Linux) or `Shift+CMD+P` (macOS) and are labeled as `DigitalJS-VSC`.
@@ -17,6 +17,10 @@ Commands can be run via `Shift+Ctrl+P` (Windows, Linux) or `Shift+CMD+P` (macOS)
 ## Extension workflow
 
 ![Features](https://raw.githubusercontent.com/Vanthez/digitaljs-vsc/main/media/img/workflow.png)
+
+## Example usage
+![Example](./media/img/demo.png)
+
 ## Notes regarding the panel
 
 * Only one circuit will be simulated at any given moment. Running `digitaljs-vsc.simulate` on a different file than the one currently being simulated will replace the current panel and refresh the webview with new input in a position relative to the column of the new source file.
@@ -55,11 +59,5 @@ DigitalJS-VSC is designed not to require any setting up before the usage.
 * DigitalJS-VSC uses fixed version of yosys.js (0.10.5), as its API might dynamically change.
 
 ## Known Issues
-
-## Release Notes
-
-### 0.1.0
-
-Initial release of DigitalJS-VSC
 
 -----------------------------------------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 {
   "name": "digitaljs-vsc",
   "displayName": "DigitalJS-VSC",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Integration of digital logic simulator DigitalJS with VS Code.",
   "main": "./src/extension.js",
   "publisher": "michal-markiewicz",
