@@ -19,7 +19,7 @@ Commands can be run via `Shift+Ctrl+P` (Windows, Linux) or `Shift+CMD+P` (macOS)
 ![Features](https://raw.githubusercontent.com/Vanthez/digitaljs-vsc/main/media/img/workflow.png)
 
 ## Example usage
-![Example](./media/img/demo.png)
+![Example](https://raw.githubusercontent.com/Vanthez/digitaljs-vsc/main/media/img/demo.png)
 
 ## Notes regarding the panel
 
