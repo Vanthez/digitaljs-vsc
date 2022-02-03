@@ -8,6 +8,5 @@
 **/.eslintrc.json
 media/img/workflow.png
 media/img/demo.png
-patches/
 src/types.d.ts
 webpack.config.js

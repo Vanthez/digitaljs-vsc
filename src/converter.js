@@ -40,8 +40,8 @@ async function verilogToYosys(verilogContent, fileName, fileExtension, optimize,
 }
 
 async function yosysToDigitalJson(yosysJson) {
-    const res = await yosys2digitaljs.custom_process_yosys_json(yosysJson);
-    return res.output;
+    const res = await yosys2digitaljs.yosys2digitaljs(yosysJson);
+    return res;
 }
 
 module.exports = {

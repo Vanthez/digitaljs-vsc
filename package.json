@@ -1,7 +1,7 @@
 {
   "name": "digitaljs-vsc",
   "displayName": "DigitalJS-VSC",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Integration of digital logic simulator DigitalJS with VS Code.",
   "main": "./src/extension.js",
   "publisher": "michal-markiewicz",
@@ -111,7 +111,7 @@
     ]
   },
   "scripts": {
-    "postinstall": "patch-package && npm run build",
+    "postinstall": "npm run build",
     "build": "webpack",
     "lint": "eslint .",
     "pretest": "npm run lint",
@@ -132,11 +132,10 @@
     "webpack-cli": "^4.9.2"
   },
   "dependencies": {
-    "digitaljs": "^0.10.0",
+    "digitaljs": "^0.11.0",
     "jquery": "^3.6.0",
-    "patch-package": "^6.4.7",
     "sinon": "^12.0.1",
     "yosys": "=0.10.5",
-    "yosys2digitaljs": "=0.5.0"
+    "yosys2digitaljs": "^0.6.0"
   }
 }

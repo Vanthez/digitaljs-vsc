@@ -55,7 +55,6 @@ DigitalJS-VSC is designed not to require any setting up before the usage.
 
 ## Technical notes
 
-* DigitalJS-VSC uses fixed version of yosys2digitaljs (0.5.0), as it is strictly dependent on patch file with diff that it applies to modify original yosys2digitaljs to use yosys.js output file directly instead of running yosys.
 * DigitalJS-VSC uses fixed version of yosys.js (0.10.5), as its API might dynamically change.
 
 ## Known Issues
